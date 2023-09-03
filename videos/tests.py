@@ -1,5 +1,6 @@
 from django.test import TestCase
-from .models import Video,VideoStateOptions
+from .models import Video
+from djangoflix.db.models import VideoStateOptions
 from django.utils.text import slugify
 from django.utils import timezone
 
