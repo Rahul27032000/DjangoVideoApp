@@ -1,11 +1,19 @@
 from django.test import TestCase
 from .models import Video,VideoStateOptions
+from django.utils.text import slugify
 from django.utils import timezone
+
 # Create your tests here.
 class VideoModelTestCase(TestCase):
     def setUp(self):
-        Video.objects.create(title="This is my title")
-        Video.objects.create(title="This is my title",state=VideoStateOptions.PUBLISH)
+        self.obj_a = Video.objects.create(title="This is my title", video_id="sdf")
+        self.obj_b = Video.objects.create(title="This is my title",state=VideoStateOptions.PUBLISH,video_id='jtyr')
+
+    def test_slug_field(self):
+        title = self.obj_a.title
+        test_slug = slugify(title)
+        self.assertEqual(test_slug,self.obj_a.slug)
+
 
     def test_valid_title(self):
         title = "This is my title"
