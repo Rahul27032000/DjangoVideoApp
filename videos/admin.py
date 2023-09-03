@@ -3,9 +3,9 @@ from .models import Video,VideoPublishedProxy,VideoAllProxy
 
 # Register your models here.
 class VideoAllAdmin(admin.ModelAdmin):
-    list_display=['title','video_id']
+    list_display=['title','state','video_id','is_published']
     search_fields =['title','video_id']
-    list_filter =['title','video_id']
+    list_filter =['title','video_id','state']
 
     class Meta:
         model = VideoAllProxy
