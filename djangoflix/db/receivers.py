@@ -1,12 +1,12 @@
 from django.utils.text import slugify
-from .models import VideoStateOptions
+from .models import PublishStateOptions
 from django.utils import timezone
 
 
 
 def publish_state_pre_save(sender,instance,*args,**kwargs):
-    is_publish = instance.state == VideoStateOptions.PUBLISH 
-    is_draft = instance.state == VideoStateOptions.DRAFT 
+    is_publish = instance.state == PublishStateOptions.PUBLISH 
+    is_draft = instance.state == PublishStateOptions.DRAFT 
     if is_publish and instance.publish_timestamp is None:
         instance.publish_timestamp = timezone.now()
     elif is_draft:
