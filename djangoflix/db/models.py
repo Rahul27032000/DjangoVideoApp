@@ -1,6 +1,6 @@
 from django.db import models
 
-class VideoStateOptions(models.TextChoices):
+class PublishStateOptions(models.TextChoices):
         # constant = DB_VALUE, USER_DISPLAY_VALUE
         PUBLISH = 'PU', "Published"
         DRAFT = 'DR', "Draft"
