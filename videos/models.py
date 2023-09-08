@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
-from djangoflix.db.models import VideoStateOptions
+from djangoflix.db.models import PublishStateOptions
 from djangoflix.db.receivers import slugify_pre_save, publish_state_pre_save
 
 class VideoQuerySet(models.QuerySet):
@@ -10,7 +10,7 @@ class VideoQuerySet(models.QuerySet):
         now = timezone.now()
         return self.filter(
             publish_timestamp__lte=now,
-            state=VideoStateOptions.PUBLISH
+            state=PublishStateOptions.PUBLISH
             )
 
 class VideoManager(models.Manager):
@@ -33,7 +33,7 @@ class Video(models.Model):
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
-    state = models.CharField(max_length=2,choices=VideoStateOptions.choices, default= VideoStateOptions.DRAFT)
+    state = models.CharField(max_length=2,choices=PublishStateOptions.choices, default= PublishStateOptions.DRAFT)
     publish_timestamp = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True,null=True)
 
 
