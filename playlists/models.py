@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from djangoflix.db.models import PublishStateOptions
 from djangoflix.db.receivers import slugify_pre_save, publish_state_pre_save
+from videos.models import Video
 
 class PlaylistQuerySet(models.QuerySet):
     def published(self):
@@ -29,7 +30,7 @@ class Playlist(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
-    
+    video = models.ForeignKey(Video, null=True,on_delete=models.SET_NULL) # one video per playlist
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
